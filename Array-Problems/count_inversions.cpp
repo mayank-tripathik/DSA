@@ -1,3 +1,6 @@
+/*------------------------Time Complexity : O(nlogn)-------------------------*/
+/*------------------Merge sort is used to calculate inversions------------------------------*/
+
 #include<iostream>
 #include<vector>
 using namespace std;

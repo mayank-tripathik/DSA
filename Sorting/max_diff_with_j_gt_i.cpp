@@ -1,3 +1,7 @@
+/*----------------------O(n) time complexity------------------*/
+/*--------------- Hint : Maintain maximum difference so far and minimum element so far at the same time--------*/
+
+
 #include<iostream>
 using namespace std;
 int main(){

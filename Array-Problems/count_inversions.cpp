@@ -13,7 +13,7 @@ int merge(int *arr, int l, int r, int k){
 		{
 			aux.push_back(arr[j]);
 			j++;
-			inv_count=inv_count+(k-i);
+			inv_count=inv_count+(k+1-i);
 		}
 		else
 		{

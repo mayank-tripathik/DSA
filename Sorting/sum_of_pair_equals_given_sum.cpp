@@ -1,3 +1,5 @@
+/*--------Algo1 : O(n) Time complexity with O(n) space complexity using hashmap------------*/
+
 #include<iostream>
 #include<unordered_set>
 using namespace std;

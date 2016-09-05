@@ -1,9 +1,10 @@
 #include <iostream>
 #include<vector>
+#include<cstdlib>
 using namespace std;
 
 int pick_pivot(int l,int r){
-	return (l+r)/2;
+	return (rand()%(r-l)+l);
 }
 
 int partition(int *arr,int l,int r, int pivot){

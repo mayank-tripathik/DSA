@@ -1,5 +1,5 @@
 /*------------------------Time Complexity : O(nlogn)------------------*/
-/-----------------------Sorts array in ascending order------------------*/
+/*-----------------------Sorts array in ascending order------------------*/
 
 
 #include <iostream>

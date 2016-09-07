@@ -1,0 +1,3 @@
+https://www.ics.uci.edu/~eppstein/161/960130.html
+http://stackoverflow.com/questions/9090378/why-cant-the-median-of-medians-algorithm-use-block-size-3
+http://home.cse.ust.hk/~dekai/271/

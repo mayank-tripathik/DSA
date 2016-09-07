@@ -1,3 +1,6 @@
+/*---------------------------Time complexity = O(nlogn)---------------------------------**/
+/*--------------This implimentation uses good pivot which is found by median of median algorithm-----------*/
+
 #include<iostream>
 #include<vector>
 #include<cstdlib>
@@ -43,28 +46,28 @@ int median_of_median(int *arr,int low,int high)
  
 }
 
-
-int partition(int *arr,int l,int r, int pivot){
-	vector<int> smaller,bigger;
-	int i,j,k;
-	for(i=l+1;i<=r;i++){
-		if(arr[i]<pivot)
-			smaller.push_back(arr[i]);
-		else if(arr[i]>pivot)
-			bigger.push_back(arr[i]);
+int partition(int *arr,int low,int high, int pivot){
+	int i=low+1;
+	int j=high;
+	while(i<=j){
+		while(arr[i]<pivot && i<=high)
+			i++;
+		while(arr[j]>pivot && j>=low)
+			j--;
+		if(i<j)
+		{
+			swap(arr[i],arr[j]);
+			i++;
+			j--;	
+		}
+		else
+			break;
+		
 	}
-	i=l;
-	for(j=0;j<smaller.size();j++){
-		arr[i++]=smaller[j];
-	}
-	arr[i]=pivot;
-	k=i;
-	i++;
-	for(j=0;j<bigger.size();j++){
-		arr[i++]=bigger[j];
-	}
-	return k;
+	swap(arr[low],arr[j]);
+	return j;
 }
+
 void quick_sort(int *arr,int l, int r){
 	if(l<r){
 		int pivot=median_of_median(arr,l,r);
@@ -75,6 +78,7 @@ void quick_sort(int *arr,int l, int r){
 		quick_sort(arr,k+1,r);
 	}
 }
+
 int main() 
 {
 	int n;

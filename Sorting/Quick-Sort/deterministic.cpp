@@ -1,48 +1,46 @@
-
 #include<iostream>
 #include<vector>
 #include<cstdlib>
 #include<algorithm>
 using namespace std;
 
-int median(int arr[],int n){
-	if(n<=5){
-		if(n%2==0)
-			return ((n/2)-1);
-		else
-			return(n/2);
+void printarr(int *arr, int n){
+	for(int i=0;i<n;i++)
+		cout<<arr[i]<<" ";
+	cout<<endl;
+
+}
+
+int median_of_median(int *arr,int low,int high)
+{
+	if(high-low+1>=5)
+	{
+		int n=high-low+1;    //size of current array
+		int num_groups=n/5;  //numbers of groups with 5 elements
+		int rem_elem=n%5;    //number of elements in last group
+		int start_index=low,end_index=low+4;
+		int index_median=low;
+		for(int i=0;i<num_groups;i++)
+		{
+            		sort(arr+start_index,arr+end_index+1);
+			swap(arr[index_median],arr[(start_index+end_index)/2]);
+			index_median++;
+			start_index=end_index+1;
+			end_index=end_index+5;
+		}
+		if(rem_elem>0)
+		{
+			int low_index=num_groups*5+low;
+            		sort(arr+low_index,arr+high+1);
+			swap(arr[index_median],arr[low_index+(rem_elem/2)]);
+		}
+		return median_of_median(arr,low,index_median-1);	
 	}
 	else
 	{
-		int i,j,k;
-		int n_group=n/5;
-		i=0;
-		for(j=0;j<n_group;j++){
-			sort(arr+i,arr+(i+5));
-			i=i+5;
-		}
-		sort(arr+(n_group*5),arr+n);
-		for(i=0;i<n;i++)
-			cout<<arr[i]<<" ";
-		cout<<endl;
-		i=2;
-		for(k=0;k<n_group;k++){
-			arr[k]=arr[i];
-			i+=5;
-		}
-		int low=n_group*5;
-		int size_last=n%5;
-		if(size_last%2==0){
-			arr[k]=arr[low+((size_last/2)-1)];
-		}
-		else
-			arr[k]=arr[low+((size_last)/2)];
-		for(i=0;i<n;i++)
-			cout<<arr[i]<<" ";
-		cout<<endl;
-		sort(arr,arr+n_group+1);
-		return median(arr,n_group+1);
+		return ((low+high)/2);
 	}
+ 
 }
 
 
@@ -67,37 +65,27 @@ int partition(int *arr,int l,int r, int pivot){
 	}
 	return k;
 }
-int quick_sort(int *arr,int l, int r,int rank){
+void quick_sort(int *arr,int l, int r){
 	if(l<r){
-		int pivot=median(arr[],r+l-1);
-		cout<<"l:"<<l<<" and r: "<<r<<endl;
-		cout<<"Pivot picked : "<<arr[pivot]<<endl;
+		int pivot=median_of_median(arr,l,r);
 		swap(arr[l],arr[pivot]);
 		pivot=arr[l];
 		int k=partition(arr,l,r,pivot);
-		cout<<"Pivot's right place:"<<k<<endl;
-		for(int i=l;i<=r;i++)
-			cout<<arr[i]<<" ";
-		cout<<endl;
-		if(rank==r-k+1)
-			return arr[k];
-		else if(rank>r-k+1)
-			return quick_sort(arr,l,k-1,rank-k);
-		else
-			return quick_sort(arr,k+1,r,rank);
+		quick_sort(arr,l,k-1);
+		quick_sort(arr,k+1,r);
 	}
-	else
-		return arr[l];
 }
-int main() {
-	int n,rank,element;
+int main() 
+{
+	int n;
 	cin>>n;
 	int arr[n];
 	for(int i=0;i<n;i++)
 		cin>>arr[i];
-	cin>>rank;
-	element=quick_sort(arr,0,n-1,rank);
-	cout<<"\nElement with rank "<<rank<<" is: ";
-	cout<<element<<endl;;
-	return 0;
+	cout<<"Given Array:\n";
+	printarr(arr,n);
+	quick_sort(arr,0,n-1);
+	cout<<"Sorted Array:\n";
+	printarr(arr,n);
+    	return 0;
 }

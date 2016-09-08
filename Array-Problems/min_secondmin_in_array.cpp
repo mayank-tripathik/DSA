@@ -9,7 +9,7 @@ void find_min(int *arr, int n){
 	}
 	else{
 		int min,second_min;
-		if(arr[0]>arr[1]){
+		if(arr[0]<arr[1]){
 			min=0;
 			second_min=1;
 		}
@@ -22,7 +22,7 @@ void find_min(int *arr, int n){
 				second_min=min;
 				min=i;
 			}
-			else if(arr[i]<arr[second_min])
+			else if(arr[i]<arr[second_min] && arr[i]!=arr[min])
 				second_min=i;
 		}
 		cout<<"Min: "<<arr[min]<<endl;

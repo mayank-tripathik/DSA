@@ -2,22 +2,22 @@
 #include<cstdlib>
 using namespace std;
 
-void find_max(int *arr, int n){
-	if(n==1){
+void find_max(int *arr, int low, int high){
+	if(high-low+1==1){
 		cout<<"Max:"<<arr[0]<<endl;
 		cout<<"No second max exist"<<endl;
 	}
 	else{
 		int max,second_max;
-		if(arr[0]>arr[1]){
-			max=0;
-			second_max=1;
+		if(arr[low]>arr[low+1]){
+			max=low;
+			second_max=low+1;
 		}
 		else{
-			max=1;
-			second_max=0;
+			max=low+1;
+			second_max=low;
 		}
-		for(int i=2;i<n;i++){
+		for(int i=low+2;i<=high;i++){
 			if(arr[i]>arr[max]){
 				second_max=max;
 				max=i;
@@ -29,6 +29,7 @@ void find_max(int *arr, int n){
 		cout<<"Second max: "<<arr[second_max]<<endl;
 	}
 }
+
 int main(){
 	int n;
 	cin>>n;
@@ -39,5 +40,5 @@ int main(){
 		arr[i]=x;
 	}
 	cout<<endl;
-	find_max(arr, n);
+	find_max(arr, 0, n-1);
 }

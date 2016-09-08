@@ -1,6 +1,6 @@
-/*---------------This algorithm finds kth largest element or (n-k+1)th smallest elment---------------*/
-/*-----------This algorithms can also be seen as an algorithm for returning element whose rank is k ---------------*/
+/*------------------This algorithm finds k smallest elements in array---------------*/
 /*-----------------Time complexity: O(n) in worst case, O(n) on average--------------------------*/
+
 
 #include<iostream>
 #include<vector>
@@ -8,17 +8,6 @@
 #include<algorithm>
 using namespace std;
 
-void printarray(int *arr,int k, int n){
-	cout<<"Array:\n";
-	/*for(int i=0;i<2*k;i++)
-		cout<<arr[i]<<" ";
-	cout<<"  ";
-	for(int i=2*k;i<n;i++)
-		cout<<arr[i]<<" ";*/
-    for(int i=0;i<n;i++)
-		cout<<arr[i]<<" ";
-	cout<<endl;
-}
 
 int median_of_median(int *arr,int low,int high)
 {
@@ -74,6 +63,23 @@ int partition(int *arr,int low,int high, int pivot){
 	return j;
 }
 
+int find_elem_rank(int *arr,int l, int r,int rank){
+	if(l<r){
+		int pivot=median_of_median(arr,l,r);
+		swap(arr[l],arr[pivot]);
+		pivot=arr[l];
+		int k=partition(arr,l,r,pivot);
+		if(rank==r-k+1)
+			return arr[k];
+		else if(rank>r-k+1)
+			return find_elem_rank(arr,l,k-1,rank-(r-k+1));
+		else
+			return find_elem_rank(arr,k+1,r,rank);
+	}
+	else
+		return arr[l];
+}
+
 void find_k_smallest(int *arr,int k, int n){
     int pivot,j,pos,i;
     if(2*k>n){
@@ -81,38 +87,21 @@ void find_k_smallest(int *arr,int k, int n){
     }
     else
     {
-        pivot=median_of_median(arr,0,2*k-1);
-        //cout<<"Pivot picked : "<<arr[pivot]<<endl;
-        swap(arr[0],arr[pivot]);
-        //printarray(arr,k,n);
-        pivot=arr[0];
-        pos=partition(arr,0,2*k-1,pivot);
-        //printarray(arr,k,n);
-        //cout<<"Pivot's right place:"<<pos<<endl;
+        find_elem_rank(arr,0,2*k-1,k);
         j=2*k;
-        //cout<<"j:"<<j<<endl;
-        i=pos+1;
+        i=k;
         while(j<n)
         {
-            //cout<<"j:"<<j<<endl;
-            //cout<<"i:"<<i<<endl;
             while(i<2*k)
             {
                 arr[i]=arr[j];
-                //printarray(arr,k,n);
                 j++;
                 i++;
                 if(j>=n)
                     break;
             }
-            pivot=median_of_median(arr,0,i-1);
-            //cout<<"Pivot picked : "<<arr[pivot]<<endl;
-            swap(arr[0],arr[pivot]);
-            //printarray(arr,k,n);
-            pivot=arr[0];
-            pos=partition(arr,0,i-1,pivot);
-            i=pos+1;
-            //printarray(arr,k,n);
+            find_elem_rank(arr,0,i,k);
+            i=k;
         }    
     }
 }
@@ -131,6 +120,7 @@ int main(){
     cout<<endl;
 	find_k_smallest(arr,k,n);
 	cout<<"k smallest number are:\n";
+	sort(arr,arr+k);
 	for(i=0;i<k;i++)
 		cout<<arr[i]<<" ";
 	cout<<endl;

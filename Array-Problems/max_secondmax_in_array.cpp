@@ -4,7 +4,7 @@ using namespace std;
 
 void find_max(int *arr, int low, int high){
 	if(high-low+1==1){
-		cout<<"Max:"<<arr[0]<<endl;
+		cout<<"Max:"<<arr[low]<<endl;
 		cout<<"No second max exist"<<endl;
 	}
 	else{

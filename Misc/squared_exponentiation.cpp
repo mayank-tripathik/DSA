@@ -28,3 +28,27 @@ int main() {
 	cout<<"number of multiplications:"<<count<<endl;
 	return 0;
 }
+
+
+
+/* ------------ Iterative approach (Faster and recommended)----------------*/
+
+#include <iostream>
+using namespace std;
+int power(int x, int n){
+	int result=1;
+	while(n>0){
+		if(n&1)    //checking if number is odd
+			result=result*x;
+		x=x*x;
+		n=n>>1;    //dividing n by 2 using faster shift operation
+	}
+	return result;
+}
+int main() {
+	int x,n;
+	cin>>x;
+	cin>>n;
+	cout<<power(x,n)<<endl;
+	return 0;
+}

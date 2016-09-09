@@ -1,4 +1,5 @@
-/* In this program, fibonacci of very large n is found using matrix method that in turn uses squared exponentiation
+/* 
+ * In this program, fibonacci of very large n is found using matrix method that in turn uses squared exponentiation
  * n is stored as decimal number in array
  */
  

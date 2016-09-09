@@ -1,5 +1,6 @@
 /* 
- * In this program, fibonacci of very large n is found using matrix method that in turn uses squared exponentiation
+ * In this program, fibonacci modulo k of very large n (has 10^6 digits) is found using matrix method 
+ * Matrix power is calculated using squared exponentiation that has O(logn) complexity
  * n is stored as decimal number in array
  */
  

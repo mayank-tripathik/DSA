@@ -1,0 +1,74 @@
+/*
+ * Input n is in the form of binary, stored in array
+ * Fibonacci mudulo k is calculated using matrix approach
+ * n can have 10^6 digits i.e n=10^10^6
+ * squared exponentiation is used for matrix power
+ * Complexity: O(logn)
+ */
+ 
+ 
+#include <iostream>
+#include<cstdlib>
+using namespace std;
+
+int A[2][2]={{1,1},{1,0}};
+int result[2][2]={{1,0},{0,1}};
+
+void matrix_multiply(int M1[][2], int M2[][2], long k)
+{
+    int temp[2][2];
+    temp[0][0] = M1[0][0] * M2[0][0] + M1[0][1] * M2[1][0];
+    temp[0][1] = M1[0][0] * M2[0][1] + M1[0][1] * M2[1][1];
+    temp[1][0] = M1[1][0] * M2[0][0] + M1[1][1] * M2[1][0];
+    temp[1][1] = M1[1][0] * M2[0][1] + M1[1][1] * M2[1][1];
+    for (int i = 0; i < 2; ++i)
+        for (int j = 0; j < 2; ++j)
+            M1[i][j] = temp[i][j] % k;
+}
+
+void div_by_two(long *arr, long *lsb){
+	*lsb=*lsb-1;
+}
+
+bool num_greater_zero(long *num, long *msb, long *lsb){
+	if (*msb> *lsb|| num[*msb] == 0)
+		return 0;
+	else
+		return 1;
+}
+
+void matrix_power(long *num,long n,long k){
+	long msb,i=0;
+	while(num[i]==0)
+		i++;
+	msb=i;
+	long lsb=n-1;
+	while(num_greater_zero(num,&msb,&lsb)){
+		if(num[lsb]==1)
+			matrix_multiply(result,A,k);
+		matrix_multiply(A,A,k);
+		div_by_two(num,&lsb);
+	}
+}
+
+
+int fib(long *num, long n,long k){
+	matrix_power(num,n,k);
+	return result[1][0];
+}
+
+
+int main() {
+	long n,k;
+	cin>>n;
+	cin>>k;
+	long num[n];
+	for(int i=1;i<n;i++){
+		int x=rand()%2;
+		//cout<<x<<" ";
+		num[i]=x;
+	}
+	num[0]=1;
+	cout<<"Fib(n): "<<fib(num,n,k);
+	return 0;
+}

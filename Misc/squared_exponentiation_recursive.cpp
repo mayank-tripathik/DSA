@@ -15,8 +15,7 @@ int power(int x, int n){
 		count++;
 		return power(x*x,n/2);
 	}
-		
-	else{
+	else if(n%2!=0){
 		count=count+2;
 		return (x*power(x*x,(n-1)/2));
 	}

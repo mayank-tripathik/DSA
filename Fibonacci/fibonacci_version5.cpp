@@ -2,7 +2,7 @@
  * This program calcualtes fibonacci of a large number modulo m
  * This approach uses the concept of pisano period
  * Pisano period is the period with which the sequence of Fibonacci numbers taken modulo m repeats
- * Memory of fibonacci numbers that are post pisano period is maintained
+ * Memory of fibonacci numbers that are pre pisano period are maintained
  * Modulo period of such large n gives the desired index where fib(n) is stored in mem
  * Complexity: O(log n)
  */

@@ -13,26 +13,16 @@ using namespace std;
 int A[2][2]={{1,1},{1,0}};
 int result[2][2]={{1,0},{0,1}};
 
-void matrix_multiply_result(long k){
+void matrix_multiply(int M1[][2], int M2[][2], long k)
+{
 	int temp[2][2];
-	temp[0][0]=result[0][0]*A[0][0]+result[0][1]*A[1][0];
-	temp[0][1]=result[0][0]*A[0][1]+result[0][1]*A[1][1];
-	temp[1][0]=result[1][0]*A[0][0]+result[1][1]*A[1][0];
-	temp[1][1]=result[1][0]*A[0][1]+result[1][1]*A[1][1];
+	temp[0][0] = M1[0][0] * M2[0][0] + M1[0][1] * M2[1][0];
+	temp[0][1] = M1[0][0] * M2[0][1] + M1[0][1] * M2[1][1];
+	temp[1][0] = M1[1][0] * M2[0][0] + M1[1][1] * M2[1][0];
+	temp[1][1] = M1[1][0] * M2[0][1] + M1[1][1] * M2[1][1];
 	for (int i = 0; i < 2; ++i)
 		for (int j = 0; j < 2; ++j)
-			result[i][j] = temp[i][j] % k;
-}
-
-void matrix_multiply_A(long k){
-	int temp[2][2];
-	temp[0][0]=A[0][0]*A[0][0]+A[0][1]*A[1][0];
-	temp[0][1]=A[0][0]*A[0][1]+A[0][1]*A[1][1];
-	temp[1][0]=A[1][0]*A[0][0]+A[1][1]*A[1][0];
-	temp[1][1]=A[1][0]*A[0][1]+A[1][1]*A[1][1];
-	for (int i = 0; i < 2; ++i)
-		for (int j = 0; j < 2; ++j)
-			A[i][j] = temp[i][j] % k;
+			M1[i][j] = temp[i][j] % k;
 }
 
 void div_by_two(long *arr, long n){
@@ -62,8 +52,8 @@ bool num_greater_zero(long *num, long n){
 void matrix_power(long *num,long n,long k){
 	while(num_greater_zero(num,n)){
 		if(num[n-1]%2==1)
-			matrix_multiply_result(k);
-		matrix_multiply_A(k);
+			matrix_multiply(result,A,k);
+		matrix_multiply(A,A,k);
 		div_by_two(num,n);
 	}
 }

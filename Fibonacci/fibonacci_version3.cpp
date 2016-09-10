@@ -1,9 +1,10 @@
 /*
- * Input n is in the form of binary, stored in array
+ * Input n is in the form of decimal, stored in array
+ * Input is converted into binary, then fibonacci is calculated
  * Fibonacci mudulo k is calculated using matrix approach
  * n can have 10^6 digits i.e n=10^10^6
  * squared exponentiation is used for matrix power
- * Complexity: O(logn)
+ * Complexity: O((logn)^2)
  */
  
  

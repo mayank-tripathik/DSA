@@ -41,7 +41,7 @@ void initialize_index(int n, int *dnum){
     blsb=4*n-1;
 }
 
-bool divide_by_two(int *dnum){
+bool decimal_division_by_two(int *dnum){
     int carry=0;
     for(int i=dmsb;i<=dlsb;i++){
         int next_digit=dnum[i]+carry;
@@ -61,7 +61,7 @@ bool divide_by_two(int *dnum){
 
 void decimal_to_binary(int *dnum, int *bnum){
     while(dmsb<=dlsb){
-        bool carry_generated=divide_by_two(dnum);
+        bool carry_generated=decimal_division_by_two(dnum);
         if(carry_generated)
             bnum[bmsb]=1;
         else
@@ -78,19 +78,23 @@ bool binary_num_greater_than_zero(){
         return false;
 }
 
-bool number_is_odd(int *bnum){
+bool binary_number_is_odd(int *bnum){
     if(bnum[blsb]==1)
         return true;
     else
         return false;
 }
 
+void binary_division_by_two(){
+    blsb--;
+}
+
 void matrix_power(int *bnum,long m){
     while(binary_num_greater_than_zero()){
-        if(number_is_odd(bnum))
+        if(binary_number_is_odd(bnum))
             matrix_multiply(result,A,m);
         matrix_multiply(A,A,m);
-        blsb--;
+        binary_division_by_two();
         }
 }
 

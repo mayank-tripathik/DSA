@@ -23,27 +23,17 @@ int pick_pivot(int l,int r){
 }
 
 int partition(int *arr,int low,int high, int pivot){
-	int i=low+1;
-	int j=high;
-	while(i<=j){
-		while(i<=high && arr[i]<=pivot)
-			i++;
-		while(j>=low && arr[j]>pivot )
-			j--;
-		if(i<j)
+	int i=low;
+	for(int j=low+1;j<=high;j++)
+	{
+		if(arr[j]<pivot)
 		{
-			swap(arr[i],arr[j]);
 			i++;
-			j--;	
+			swap(arr[i],arr[j]);
 		}
-		else
-			break;
-		
 	}
-    if(j<0)
-        j=0;
-	swap(arr[low],arr[j]);
-	return j;
+	swap(arr[low],arr[i]);
+	return i;
 }
 
 

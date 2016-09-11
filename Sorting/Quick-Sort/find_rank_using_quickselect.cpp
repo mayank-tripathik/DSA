@@ -11,27 +11,18 @@ int pick_pivot(int l,int r){
 	return (rand()%(r-l)+l);
 }
 
-int partition(int *arr,int l,int r, int pivot){
-	vector<int> smaller,bigger;
-	int i,j,k;
-	for(i=l+1;i<=r;i++){
-		if(arr[i]<pivot)
-			smaller.push_back(arr[i]);
-		else if(arr[i]>pivot)
-			bigger.push_back(arr[i]);
-	}
-	i=l;
-	for(j=0;j<smaller.size();j++){
-		arr[i++]=smaller[j];
-	}
-	arr[i]=pivot;
-	k=i;
-	i++;
-	for(j=0;j<bigger.size();j++){
-		arr[i++]=bigger[j];
-	}
-	return k;
+int partition(int *arr,int low,int high, int pivot){
+	int i=low;
+    for(int j=low+1;j<=high;j++){
+        if(arr[j]<pivot){
+            i++;
+            swap(arr[i],arr[j]);   
+        }
+    }
+    swap(arr[low],arr[i]);
+    return i;
 }
+
 int quick_sort(int *arr,int l, int r,int rank){
 	if(l<r){
 		int pivot=pick_pivot(l,r);
@@ -47,7 +38,7 @@ int quick_sort(int *arr,int l, int r,int rank){
 		if(rank==r-k+1)
 			return arr[k];
 		else if(rank>r-k+1)
-			return quick_sort(arr,l,k-1,rank-k);
+			return quick_sort(arr,l,k-1,rank-(r-k+1));
 		else
 			return quick_sort(arr,k+1,r,rank);
 	}

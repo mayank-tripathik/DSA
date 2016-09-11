@@ -89,5 +89,5 @@ int main()
 	quick_sort(arr,0,n-1);
 	cout<<"Sorted Array:\n";
 	printarr(arr,0,n-1);
-    return 0;
+	return 0;
 }

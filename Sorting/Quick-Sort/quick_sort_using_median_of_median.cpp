@@ -7,8 +7,8 @@
 #include<algorithm>
 using namespace std;
 
-void printarr(int *arr, int n){
-	for(int i=0;i<n;i++)
+void printarr(int *arr, int low, int high){
+	for(int i=low;i<=high;i++)
 		cout<<arr[i]<<" ";
 	cout<<endl;
 
@@ -46,34 +46,32 @@ int median_of_median(int *arr,int low,int high)
  
 }
 
+
 int partition(int *arr,int low,int high, int pivot){
-	int i=low+1;
-	int j=high;
-	while(i<=j){
-		while(arr[i]<pivot && i<=high)
-			i++;
-		while(arr[j]>pivot && j>=low)
-			j--;
-		if(i<j)
+	int i=low;
+	for(int j=low+1;j<=high;j++)
+	{
+		if(arr[j]<pivot)
 		{
-			swap(arr[i],arr[j]);
 			i++;
-			j--;	
+			swap(arr[i],arr[j]);   
 		}
-		else
-			break;
-		
 	}
-	swap(arr[low],arr[j]);
-	return j;
+	swap(arr[low],arr[i]);
+	return i;
 }
+
 
 void quick_sort(int *arr,int l, int r){
 	if(l<r){
 		int pivot=median_of_median(arr,l,r);
 		swap(arr[l],arr[pivot]);
 		pivot=arr[l];
+        cout<<"pivot:"<<pivot<<endl;
+        printarr(arr,l,r);
 		int k=partition(arr,l,r,pivot);
+        cout<<"position:"<<k<<endl;
+        printarr(arr,l,r);
 		quick_sort(arr,l,k-1);
 		quick_sort(arr,k+1,r);
 	}
@@ -87,9 +85,9 @@ int main()
 	for(int i=0;i<n;i++)
 		cin>>arr[i];
 	cout<<"Given Array:\n";
-	printarr(arr,n);
+	printarr(arr,0,n-1);
 	quick_sort(arr,0,n-1);
 	cout<<"Sorted Array:\n";
-	printarr(arr,n);
-    	return 0;
+	printarr(arr,0,n-1);
+    return 0;
 }

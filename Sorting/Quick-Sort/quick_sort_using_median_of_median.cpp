@@ -41,7 +41,7 @@ int median_of_median(int *arr,int low,int high)
 	}
 	else
 	{
-		sort(arr,arr+high1+1);
+		sort(arr,arr+high+1);
 		return ((low+high)/2);
 	}
  

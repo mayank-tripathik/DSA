@@ -67,11 +67,11 @@ void quick_sort(int *arr,int l, int r){
 		int pivot=median_of_median(arr,l,r);
 		swap(arr[l],arr[pivot]);
 		pivot=arr[l];
-        cout<<"pivot:"<<pivot<<endl;
-        printarr(arr,l,r);
+		cout<<"pivot:"<<pivot<<endl;
+		printarr(arr,l,r);
 		int k=partition(arr,l,r,pivot);
-        cout<<"position:"<<k<<endl;
-        printarr(arr,l,r);
+		cout<<"position:"<<k<<endl;
+		printarr(arr,l,r);
 		quick_sort(arr,l,k-1);
 		quick_sort(arr,k+1,r);
 	} 

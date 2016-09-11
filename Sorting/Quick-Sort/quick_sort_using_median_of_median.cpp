@@ -74,7 +74,7 @@ void quick_sort(int *arr,int l, int r){
         printarr(arr,l,r);
 		quick_sort(arr,l,k-1);
 		quick_sort(arr,k+1,r);
-	}
+	} 
 }
 
 int main() 

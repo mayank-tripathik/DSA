@@ -1,8 +1,3 @@
-/*
- * Following implimentation uses adjacency lists using STL
- */
-
-
 #include<iostream>
 #include<utility>
 #include<vector>
@@ -33,6 +28,7 @@ int main(){
 	queue<int> visiting;
 	vector<bool> visited(nodes+1,false);
 	vector<int> level(nodes+1);
+    vector<int> parent(nodes+1);
 	cin>>x;
 	start=1;
 	visiting.push(start);
@@ -51,6 +47,7 @@ int main(){
 			flag=false;
 			if(!visited[*itr]){
 				level[*itr]=lev;
+                parent[*itr]=current;
 				//cout<<*itr<<" ";
 				visiting.push(*itr);
 				//cout<<"level of "<<(*itr)<< "is:"<<lev<<endl;
@@ -62,9 +59,10 @@ int main(){
 		//cout<<endl;
 	}
 	for(int i=1;i<=nodes;i++){
-		//cout<<level[i]<<endl;
-		if(level[i]==x)
-		count++;
+		cout<<"Level of node "<<i<<" is:"<<level[i]<<endl;
+	}
+    	for(int i=1;i<=nodes;i++){
+		cout<<"parent of node "<<i<<" is:"<<parent[i]<<endl;
 	}
 	cout<<count;
 	

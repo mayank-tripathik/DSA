@@ -1,6 +1,6 @@
 /*
  * Implimentation of bfs using adjacency list(using STL)
- * Time Complexity O(V*E) which can be O(V^2) in worst case
+ * Time Complexity O(V+E)
  * Space Complexity: O(V) , Queue is used
 */
 

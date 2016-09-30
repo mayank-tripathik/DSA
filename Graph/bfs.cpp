@@ -32,8 +32,9 @@ int main(){
 		visited[current]=true;
 		itr=graph[current].begin();
 		while(itr!=graph[current].end()){
-			if(!visited[*itr]){
-                cout<<*itr<<endl;
+			if(!visited[*itr])
+			{
+                		cout<<*itr<<endl;
 				visiting.push(*itr);	
 			}
 			++itr;

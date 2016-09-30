@@ -23,9 +23,9 @@ int main(){
 	}
 	queue<int> visiting;
 	vector<bool> visited(nodes+1,false);
-    cin>>start; 
+    	cin>>start; 
 	visiting.push(start);
-    cout<<"Nodes are visited in the following order starting from vertex "<<start<<endl;
+    	cout<<"Nodes are visited in the following order starting from vertex "<<start<<endl;
 	while(!visiting.empty()){
 		int current=visiting.front();
 		visiting.pop();

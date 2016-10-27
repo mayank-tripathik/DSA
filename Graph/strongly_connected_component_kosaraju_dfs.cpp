@@ -52,7 +52,10 @@ int main(){
         cin>>u>>v;
         graph[u].push_back(v);
     }
-    dfs(graph,1,visited,1);
+    for(int i=1;i<=nodes;i++){
+        if(!visited[i])
+            dfs(graph,i,visited,1);
+    }
     vector<list<int> > transpose_graph=transpose(graph);
     reset(visited);
     while(!finish.empty()){

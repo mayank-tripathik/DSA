@@ -25,24 +25,20 @@ void print(vector<int> &vec){
 
 void djikshtra(vector<list<P> > &graph, int start){
     int nodes=graph.size()-1;
-    cout<<nodes;
-    int sum=0;
     vector<bool> status(nodes+1,false);
     vector<int> dist(nodes+1,INT_MAX);
     vector<int> parent(nodes+1,-1);
     dist[start]=0;
     int unvisited=nodes;
-    for(int i=1;i<=nodes;i++){
+    while(unvisited){
         int u=getmin(status,dist);
         status[u]=true;
         unvisited--;
-        sum+=dist[u];
-        print(dist);
         for(auto itr=graph[u].begin();itr!=graph[u].end();itr++){
             int v=(*itr).first;
             int w=(*itr).second;
-            if(w<dist[v]){
-                dist[v]=w;
+            if(dist[u]+w<dist[v]){
+                dist[v]=dist[u]+w;
                 parent[v]=u;
             }
                 
@@ -52,7 +48,6 @@ void djikshtra(vector<list<P> > &graph, int start){
     print(parent);
     cout<<"Shortest Distance Array:"<<endl;
     print(dist);
-    cout<<sum<<endl;
     
 }
 

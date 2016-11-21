@@ -30,11 +30,6 @@ int zero_one_knapsack(int total, vector<int> &weight, vector<int> &profit){
                 table[i][j]=table[i-1][j];
         }
     }  
-    for(int i=0;i<row;i++){
-        for(int j=0;j<col;j++)
-            cout<<table[i][j]<<" ";
-        cout<<endl;
-    }
     return table[row-1][col-1];
 }
 

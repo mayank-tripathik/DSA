@@ -68,3 +68,71 @@ int main(){
     cin>>start;
     djikshtra(graph,start);
 }
+
+
+/******** * Getting min using priority queue******/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef pair<int,int> P;
+
+
+void print(vector<int> &vec){
+    for(int i=0;i<vec.size();i++){
+        cout<<vec[i]<<" ";
+    }
+    cout<<endl;
+}
+
+void prim_minimum_spanning_tree(vector<vector<P> > &graph, int start){
+    int nodes=graph.size();
+    vector<int> dist(nodes,INT_MAX);
+    vector<bool> visited(nodes,false);
+    vector<int> parent(nodes,-1);
+    priority_queue<P,vector<P>,greater<P> > pq;
+    dist[start]=0;
+    pq.push({0,start});
+    while(!pq.empty()){
+        P qfront=pq.top();
+        int u=qfront.second;
+        pq.pop();
+        if(!visited[u]){
+            visited[u]=true;
+            for(int i=0;i<graph[u].size();i++){
+                P p=graph[u][i];
+                int w=p.second;
+                int v=p.first;
+                if(!visited[v] && w<dist[v]){
+                    dist[v]=w;
+                    parent[v]=u;
+                    pq.push({w,v});
+                }
+                
+            }
+        }
+    }
+    cout<<"Parent array:"<<endl;
+    print(parent);
+}
+
+int main(){
+    int test;
+    cin>>test;
+    int caseno=0;
+    while(test--){
+        int nodes,edges,start;
+        cin>>nodes>>edges;
+        vector<vector<P> >graph(nodes);
+        for(int i=1;i<=edges;i++){
+            int u,v,w;
+            cin>>u>>v>>w;
+            if(u!=v){
+                graph[u].push_back({v,w});
+                graph[v].push_back({u,w});
+            }
+        }
+        start=0;
+        prim_minimum_spanning_tree(graph,start);
+    }    
+}
